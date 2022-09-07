@@ -26,19 +26,23 @@ const data = {
   }),
   // typical CRUD here
   actions: {
-    async delete({ commit }, id) {
+    async delete({ commit, dispatch }, id) {
       try {
+        dispatch("UI/setLoading", null, { root: true });
         await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
           method: "DELETE"
         });
         commit("DELETE", id);
       } catch (e) {
         console.log(e);
+      } finally {
+        dispatch("UI/unsetLoading", null, { root: true });
       }
     },
-    async update({ commit }, todo) {
+    async update({ commit, dispatch }, todo) {
       const { id, title, completed, userId } = todo;
       try {
+        dispatch("UI/setLoading", null, { root: true });
         const response = await fetch(
           `https://jsonplaceholder.typicode.com/todos/${id}`,
           {
@@ -54,11 +58,14 @@ const data = {
         commit("UPDATE", updatedTodo);
       } catch (e) {
         console.log(e);
+      } finally {
+        dispatch("UI/unsetLoading", null, { root: true });
       }
     },
-    async create({ commit }, todo) {
+    async create({ commit, dispatch }, todo) {
       const { title, completed, userId } = todo;
       try {
+        dispatch("UI/setLoading", null, { root: true });
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/todos",
           {
@@ -73,10 +80,13 @@ const data = {
         commit("CREATE", newTodo);
       } catch (e) {
         console.log(e);
+      } finally {
+        dispatch("UI/unsetLoading", null, { root: true });
       }
     },
-    async readAll({ commit }) {
+    async readAll({ commit, dispatch }) {
       try {
+        dispatch("UI/setLoading", null, { root: true });
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/todos"
         );
@@ -84,6 +94,8 @@ const data = {
         commit("READ_ALL", todos);
       } catch (e) {
         console.log(e);
+      } finally {
+        dispatch("UI/unsetLoading", null, { root: true });
       }
     },
     setFilters({ commit }, payload) {

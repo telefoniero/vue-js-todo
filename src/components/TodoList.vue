@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table class="todo-list" v-show="filteredTodos.length && !isLoading">
+    <table class="todo-list" v-show="filteredTodos.length">
       <tr class="todo-list__headers list-headers">
         <th
           class="list-headers__item todo-list__cell todo-list__cell_id list-headers__item_id"
@@ -39,30 +39,25 @@
     <h3 class="todo-list__empty" v-if="!filteredTodos.length && !isLoading">
       Таких дел нет!
     </h3>
-    <Loader v-else-if="isLoading" />
   </div>
 </template>
 
 <script>
 import TodoItem from "./TodoItem.vue";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 export default {
   name: "TodoList",
   components: { TodoItem },
-  data() {
-    return {
-      isLoading: true
-    };
-  },
   methods: {
     ...mapActions("data", ["readAll"])
   },
   computed: {
-    ...mapGetters("data", ["filteredTodos"])
+    ...mapGetters("data", ["filteredTodos"]),
+    ...mapState("UI", ["isLoading"])
   },
   mounted() {
-    this.readAll().then(() => (this.isLoading = false));
+    this.readAll();
   }
 };
 </script>

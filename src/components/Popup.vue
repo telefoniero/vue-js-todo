@@ -49,11 +49,8 @@ export default {
       this.change({ completed });
     },
     saveData(data) {
-      this.isLoading = true;
-      this.save(data).then(() => {
-        this.isLoading = false;
-        this.close();
-      });
+      this.save(data);
+      this.close();
     }
   },
   mounted() {
