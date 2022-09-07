@@ -15,10 +15,12 @@ const UI = {
     // just to keep tendency to avoid calling mutations straight
     open({ commit }, data) {
       commit("OPEN");
+      document.body.style.overflow = "hidden";
       commit("UPDATE_DATA", data);
     },
     close({ commit }) {
       commit("CLOSE");
+      document.body.style.overflow = "";
     },
     changeData({ commit }, payload) {
       commit("CHANGE_DATA", payload);

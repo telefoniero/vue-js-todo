@@ -25,13 +25,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions({ delete: "data/delete", toEdit: "UI/open" }),
+    ...mapActions({ delete: "data/delete", edit: "UI/open" }),
     deleteItem() {
       this.delete(this.$props.todo.id);
-    },
-    edit(todo) {
-      document.body.style.overflow = "hidden";
-      this.toEdit(todo);
     }
   }
 };

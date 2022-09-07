@@ -35,10 +35,7 @@ export default {
       save: "data/update"
     }),
     togglePopup(event) {
-      if (event.target == this.$refs.backdrop) {
-        this.close();
-        document.body.style.overflow = "";
-      }
+      if (event.target == this.$refs.backdrop) this.close();
     },
     updateTitle(title) {
       this.change({ title });
