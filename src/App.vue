@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="app">
+      <Filters />
       <TodoList />
       <Popup />
     </div>
@@ -10,9 +11,10 @@
 <script>
 import TodoList from "@/components/TodoList.vue";
 import Popup from "@/components/Popup.vue";
+import Filters from "./components/Filters.vue";
 
 export default {
   name: "App",
-  components: { TodoList, Popup }
+  components: { TodoList, Popup, Filters }
 };
 </script>

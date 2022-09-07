@@ -1,6 +1,6 @@
 <template>
   <div class="popup" ref="backdrop" v-if="showPopup">
-    <div class="popup__content">
+    <div class="popup__content" v-show="!isLoading">
       <h2 class="popup__title">{{ "Задача №" + data.id }}</h2>
       <CustomInput
         class="popup__input"
@@ -12,18 +12,23 @@
         :checked="data.completed"
         @change="updateCompleted"
       />
-      <button type="button" @click="save(data)">Save</button>
+      <button class="button popup__btn" type="button" @click="saveData">
+        Save
+      </button>
     </div>
+    <Loader v-if="isLoading" class="popup__loader" />
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
-import CustomInput from "./UI/CustomInput.vue";
-import CustomCheckbox from "./UI/CustomCheckbox.vue";
 
 export default {
-  components: { CustomInput, CustomCheckbox },
+  data: () => {
+    return {
+      isLoading: false
+    };
+  },
   computed: {
     ...mapState("UI", ["showPopup", "data"])
   },
@@ -42,6 +47,13 @@ export default {
     },
     updateCompleted(completed) {
       this.change({ completed });
+    },
+    saveData(data) {
+      this.isLoading = true;
+      this.save(data).then(() => {
+        this.isLoading = false;
+        this.close();
+      });
     }
   },
   mounted() {

@@ -1,23 +1,7 @@
 .list-headers {
   &__item {
-    border: 1px solid black;
-    display: block;
-    width: 100%;
-    max-width: 10%;
-    &_id {
-      max-width: 10%;
-    }
-    &_title {
-      max-width: 100%;
-    }
-    &_completed {
-      max-width: 10%;
-    }
-    &_edit {
-      max-width: 10%;
-    }
-    &_delete {
-      max-width: 10%;
-    }
+    padding: 1em 0;
+    font-weight: normal;
+    text-transform: uppercase;
   }
 }

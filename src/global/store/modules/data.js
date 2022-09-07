@@ -11,7 +11,18 @@ const data = {
   // it's not necessary here
   state: () => ({
     todos: [],
-    filter: ""
+    filters: {
+      title: {
+        value: "",
+        match: (value, toInclude) => value.includes(toInclude), // method to match
+        emptyValue: ""
+      },
+      completed: {
+        value: null,
+        match: (value, toCompare) => value === toCompare,
+        emptyValue: null
+      }
+    }
   }),
   // typical CRUD here
   actions: {
@@ -27,7 +38,6 @@ const data = {
     },
     async update({ commit }, todo) {
       const { id, title, completed, userId } = todo;
-      console.log(id, title, completed, userId);
       try {
         const response = await fetch(
           `https://jsonplaceholder.typicode.com/todos/${id}`,
@@ -42,7 +52,6 @@ const data = {
         );
         const updatedTodo = await response.json();
         commit("UPDATE", updatedTodo);
-        console.log(updatedTodo);
       } catch (e) {
         console.log(e);
       }
@@ -76,6 +85,9 @@ const data = {
       } catch (e) {
         console.log(e);
       }
+    },
+    setFilters({ commit }, payload) {
+      commit("SET_FILTERS", payload);
     }
   },
   mutations: {
@@ -94,11 +106,28 @@ const data = {
     },
     READ_ALL(state, allTodos) {
       state.todos = allTodos; // todos are new array here, so no spread
+    },
+    SET_FILTERS(state, payload) {
+      const { title, completed } = payload;
+      state.filters.title.value = title;
+      state.filters.completed.value = completed;
     }
   },
   getters: {
     filteredTodos(state) {
-      return state.todos.filter(todo => todo.title.includes(state.filter));
+      let filtered = state.todos;
+      const filters = state.filters;
+
+      for (const key in filters) {
+        if (Object.hasOwnProperty.call(filters, key)) {
+          const filterValue = filters[key].value;
+          if (filterValue !== filters[key].emptyValue) {
+            const match = filters[key].match; // function
+            filtered = filtered.filter(todo => match(todo[key], filterValue));
+          }
+        }
+      }
+      return filtered;
     }
   }
 };

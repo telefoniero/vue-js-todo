@@ -1,0 +1,3 @@
+<template>
+  <div class="loader"><div class="loader__circle"></div></div>
+</template>

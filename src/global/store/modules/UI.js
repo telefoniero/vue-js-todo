@@ -7,12 +7,11 @@ const UI = {
     // in real project would be using named slots
     data: {
       // id: 1,
-      // title: "lalala",
-      // completed: false
+      title: "",
+      completed: null
     }
   }),
   actions: {
-    // just to keep tendency to avoid calling mutations straight
     open({ commit }, data) {
       commit("OPEN");
       document.body.style.overflow = "hidden";
@@ -34,11 +33,10 @@ const UI = {
       state.showPopup = false;
     },
     UPDATE_DATA(state, data) {
-      state.data = data; // data is new object
+      state.data = { ...data }; // data is new object
     },
     CHANGE_DATA(state, data) {
       state.data = { ...state.data, ...data };
-      console.log(state.data);
     }
   }
 };

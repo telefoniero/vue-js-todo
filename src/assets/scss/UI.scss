@@ -1,0 +1,58 @@
+.input {
+  border: 0;
+  border-bottom: 1px solid black;
+  opacity: 0.5;
+  transition: 0.5s;
+  font-size: 1.5rem;
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.checkbox {
+  cursor: pointer;
+  display: inline-block;
+  input {
+    display: none;
+    &:checked ~ div::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  &__image {
+    width: 1em;
+    height: 1em;
+    border-radius: 0.1em;
+    border: 1px solid black;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 0.7em;
+      height: 0.7em;
+      border-radius: 0.07em;
+      background-color: black;
+      transition: 0.25s;
+    }
+  }
+}
+
+.button {
+  border: none;
+  display: inline-block;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  padding: 0.5em 1em;
+  border-radius: 0.2em;
+  transition: 0.25s;
+  &:hover {
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: transparent;
+  }
+}
