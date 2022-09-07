@@ -27,6 +27,7 @@ const data = {
     },
     async update({ commit }, todo) {
       const { id, title, completed, userId } = todo;
+      console.log(id, title, completed, userId);
       try {
         const response = await fetch(
           `https://jsonplaceholder.typicode.com/todos/${id}`,
@@ -41,6 +42,7 @@ const data = {
         );
         const updatedTodo = await response.json();
         commit("UPDATE", updatedTodo);
+        console.log(updatedTodo);
       } catch (e) {
         console.log(e);
       }
@@ -77,26 +79,26 @@ const data = {
     }
   },
   mutations: {
-    DELETE({ todos }, id) {
-      todos = todos.filter(todo => todo.id !== id);
+    DELETE(state, id) {
+      state.todos = state.todos.filter(todo => todo.id !== id);
     },
-    UPDATE({ todos }, todo) {
+    UPDATE(state, todo) {
       const { id } = todo;
-      const indexToUpdate = todos.findIndex(todo => todo.id === id);
-      todos[indexToUpdate] = todo;
-      // because each item is not reactive by defaulty
-      todos = { ...todos };
+      const indexToUpdate = state.todos.findIndex(todo => todo.id === id);
+      state.todos[indexToUpdate] = todo;
+      // because each item is not reactive by default
+      state.todos = [...state.todos];
     },
-    CREATE({ todos }, newTodo) {
-      todos = [...todos, newTodo]; // simple spread
+    CREATE(state, newTodo) {
+      state.todos = [...state.todos, newTodo]; // simple spread
     },
-    READ_ALL({ todos }, allTodos) {
-      todos = allTodos; // todos are new array here, so no spread
+    READ_ALL(state, allTodos) {
+      state.todos = allTodos; // todos are new array here, so no spread
     }
   },
   getters: {
-    filteredTodos({ todos, filter }) {
-      return todos.filter(todo => todo.title.includes(filter));
+    filteredTodos(state) {
+      return state.todos.filter(todo => todo.title.includes(state.filter));
     }
   }
 };

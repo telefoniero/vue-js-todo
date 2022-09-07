@@ -3,7 +3,13 @@ const UI = {
   state: () => ({
     // if there were many elements, create module for each
     showPopup: false,
-    popupData: {}
+    // called todo because of specific task
+    // in real project would be using named slots
+    data: {
+      // id: 1,
+      // title: "lalala",
+      // completed: false
+    }
   }),
   actions: {
     // just to keep tendency to avoid calling mutations straight
@@ -13,17 +19,24 @@ const UI = {
     },
     close({ commit }) {
       commit("CLOSE");
+    },
+    changeData({ commit }, payload) {
+      commit("CHANGE_DATA", payload);
     }
   },
   mutations: {
-    OPEN({ showPopup }) {
-      showPopup = true;
+    OPEN(state) {
+      state.showPopup = true;
     },
-    CLOSE({ showPopup }) {
-      showPopup = false;
+    CLOSE(state) {
+      state.showPopup = false;
     },
-    UPDATE_DATA({ popupData }, data) {
-      popupData = data; // data is new object
+    UPDATE_DATA(state, data) {
+      state.data = data; // data is new object
+    },
+    CHANGE_DATA(state, data) {
+      state.data = { ...state.data, ...data };
+      console.log(state.data);
     }
   }
 };

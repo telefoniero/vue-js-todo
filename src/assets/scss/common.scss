@@ -3,9 +3,16 @@
 *::before {
   padding: 0;
   margin: 0;
+  font-family: "Arial", sans-serif;
+  box-sizing: border-box;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.app {
+  max-width: 1500px;
+  margin: 0 auto;
 }

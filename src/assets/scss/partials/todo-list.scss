@@ -1,0 +1,14 @@
+.todo-list {
+  border-collapse: collapse;
+  border: 1px solid black;
+  width: 100%;
+  &__headers {
+    display: flex;
+    width: 100%;
+  }
+
+  &__item {
+    display: flex;
+    width: 100%;
+  }
+}

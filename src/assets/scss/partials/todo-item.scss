@@ -1,0 +1,19 @@
+.todo-item {
+  &__field {
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    max-width: 10%;
+    &_id {
+    }
+    &_title {
+      max-width: 100%;
+    }
+    &_completed {
+    }
+    &_edit {
+    }
+    &_delete {
+    }
+  }
+}
