@@ -3,9 +3,17 @@
 *::before {
   padding: 0;
   margin: 0;
-  font-family: "Arial", sans-serif;
+  font-family: "Karla", sans-serif;
   box-sizing: border-box;
   outline: none;
+}
+
+body {
+  background-color: #f2f4f7;
+}
+
+ul {
+  list-style: none;
 }
 
 .app {
@@ -14,6 +22,9 @@
     font-size: 2em;
     padding: 0.3em;
     text-align: center;
+    color: $mainColor;
+    text-transform: uppercase;
+    margin-bottom: 1em;
   }
 }
 
@@ -37,7 +48,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba($color: #000000, $alpha: 0.3);
+  background-color: rgba($color: $mainColor, $alpha: 0.2);
   z-index: 20;
   &__circle {
     position: absolute;
@@ -47,17 +58,6 @@ button {
     height: 5vw;
     border-radius: 50%;
     animation: loading 0.4s alternate infinite, scaling 0.5s alternate infinite;
-    &::after {
-      content: "";
-      position: absolute;
-      width: 4vw;
-      height: 4vw;
-      border-radius: 50%;
-      left: 50%;
-      top: 50%;
-      background-color: rgba($color: #fff, $alpha: 0.5);
-      animation: scaling 0.2s alternate infinite;
-    }
   }
 }
 
@@ -72,9 +72,9 @@ button {
 
 @keyframes loading {
   from {
-    background-color: rgba($color: #000000, $alpha: 0.3);
+    background-color: rgba($color: #98a2b3, $alpha: 0.5);
   }
   to {
-    background-color: rgba($color: #000000, $alpha: 0.7);
+    background-color: rgba($color: #98a2b3, $alpha: 1);
   }
 }

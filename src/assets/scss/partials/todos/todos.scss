@@ -1,0 +1,51 @@
+.todos {
+  &__container {
+    max-width: 680px;
+    margin: 0 auto;
+    @include mobile {
+      max-width: 100%;
+      padding: 0 1em;
+    }
+  }
+  &__toggler {
+    display: none;
+    @include mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1em;
+    }
+  }
+  &__counter {
+    display: block;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 0.8em;
+    color: $secondaryColor;
+    letter-spacing: -0.05em;
+  }
+  &__top {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__list {
+    max-width: 320px;
+    width: 100%;
+    @include mobile {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+  }
+  &__title {
+    text-align: center;
+    font-size: 2rem;
+    letter-spacing: -0.02;
+  }
+}

@@ -1,23 +1,27 @@
 <template>
-  <div class="popup" ref="backdrop" v-if="showPopup">
-    <div class="popup__content" v-show="!isLoading">
-      <h2 class="popup__title">{{ "Задача №" + data.id }}</h2>
-      <CustomInput
-        class="popup__input"
-        :value="data.title"
-        @input="updateTitle"
-      />
-      <CustomCheckbox
-        class="popup__checkbox"
-        :checked="data.completed"
-        @change="updateCompleted"
-      />
-      <button class="button popup__btn" type="button" @click="saveData">
-        Save
-      </button>
+  <transition name="fade">
+    <div class="popup" ref="backdrop" v-if="showPopup">
+      <div class="popup__content" v-show="!isLoading">
+        <h2 class="popup__title">{{ titleContent }}</h2>
+        <CustomInput
+          class="popup__input"
+          :value="data.title"
+          @input="updateTitle"
+        />
+        <CustomCheckbox
+          class="popup__checkbox"
+          :checked="data.completed"
+          @change="updateCompleted"
+          v-if="mode == 'edit'"
+        >
+          <span>Completed:</span>
+        </CustomCheckbox>
+        <button class="button popup__btn" type="button" @click="saveData">
+          Save
+        </button>
+      </div>
     </div>
-    <Loader v-if="isLoading" class="popup__loader" />
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -30,14 +34,18 @@ export default {
     };
   },
   computed: {
-    ...mapState("UI", ["showPopup", "data"])
+    ...mapState("UI", ["showPopup", "data", "mode"]),
+    titleContent() {
+      return this.mode == "edit" ? `Task #${this.data.id}` : "New task";
+    }
   },
   methods: {
     ...mapActions({
       open: "UI/open",
       close: "UI/close",
       change: "UI/changeData",
-      save: "data/update"
+      update: "data/update",
+      create: "data/create"
     }),
     togglePopup(event) {
       if (event.target == this.$refs.backdrop) this.close();
@@ -48,8 +56,12 @@ export default {
     updateCompleted(completed) {
       this.change({ completed });
     },
-    saveData(data) {
-      this.save(data);
+    saveData() {
+      if (this.mode == "edit") {
+        this.update(this.data);
+      } else if (this.mode == "create") {
+        this.create(this.data);
+      }
       this.close();
     }
   },

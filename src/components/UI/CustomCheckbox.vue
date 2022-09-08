@@ -1,5 +1,6 @@
 <template>
   <label class="checkbox">
+    <slot />
     <input
       type="checkbox"
       :checked="checked"

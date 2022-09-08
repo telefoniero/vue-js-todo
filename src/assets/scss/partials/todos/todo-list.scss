@@ -1,0 +1,33 @@
+.todo-list {
+  &__title {
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: -0.0075em;
+    color: $secondaryColor;
+    text-transform: uppercase;
+  }
+
+  &__item {
+    margin-bottom: 24px;
+    &_title {
+      margin-bottom: 32px;
+      @include mobile {
+        display: none;
+      }
+    }
+    &_note {
+      color: $secondaryColor;
+      text-transform: uppercase;
+      font-size: 0.7em;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  @include mobile {
+    display: none;
+    &._show {
+      display: block;
+    }
+  }
+}

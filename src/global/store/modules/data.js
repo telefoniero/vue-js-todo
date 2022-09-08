@@ -63,7 +63,7 @@ const data = {
       }
     },
     async create({ commit, dispatch }, todo) {
-      const { title, completed, userId } = todo;
+      const { title, completed, userId = 1 } = todo;
       try {
         dispatch("UI/setLoading", null, { root: true });
         const response = await fetch(
@@ -140,6 +140,9 @@ const data = {
         }
       }
       return filtered;
+    },
+    todosLength(state) {
+      return state.todos.length;
     }
   }
 };

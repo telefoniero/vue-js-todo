@@ -1,7 +1,7 @@
 <template>
   <div class="filters">
     <label class="filters__label filters__label_input">
-      <span>Поиск: </span>
+      <!-- <span>Поиск: </span> -->
       <CustomInput
         class="filters__input"
         v-model="title"
@@ -9,7 +9,7 @@
       />
     </label>
     <label class="filters__label filters__label_checkbox">
-      <span>Выполнено</span>
+      <!-- <span>Выполнено</span> -->
       <CustomCheckbox
         class="filters__checkbox"
         v-model="completed"

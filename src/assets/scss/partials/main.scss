@@ -1,4 +1,7 @@
-@import "./todo-list.scss";
-@import "./list-headers.scss";
-@import "./todo-item.scss";
+@import "./todos/todos.scss";
+@import "./todos/todo-list.scss";
+@import "./todos/todo-item.scss";
+
+@import "./filters.scss";
 @import "./popup.scss";
+@import "./toggler.scss";

@@ -1,5 +1,8 @@
-@import './mixins.scss';
+@import "./mixins.scss";
+@import "./vars.scss";
 @import "./common.scss";
 @import "./UI.scss";
+
 @import "./partials/main.scss";
-@import "./partials/filters.scss";
+
+@import "./animations/main.scss";

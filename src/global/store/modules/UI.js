@@ -4,6 +4,7 @@ const UI = {
     // if there were many elements, create module for each
     showPopup: false,
     isLoading: false,
+    mode: "",
     // called todo because of specific task
     // in real project would be using named slots
     data: {
@@ -13,8 +14,9 @@ const UI = {
     }
   }),
   actions: {
-    open({ commit }, data) {
+    open({ commit }, { mode, data = {} }) {
       commit("OPEN");
+      commit("SET_MODE", mode);
       document.body.style.overflow = "hidden";
       commit("UPDATE_DATA", data);
     },
@@ -32,6 +34,9 @@ const UI = {
     unsetLoading({ commit }) {
       commit("UNSET_LOADING");
       document.body.style.overflow = "";
+    },
+    setMode({ commit }, mode) {
+      commit("SET_MODE", mode);
     }
   },
   mutations: {
@@ -52,6 +57,9 @@ const UI = {
     },
     UNSET_LOADING(state) {
       state.isLoading = false;
+    },
+    SET_MODE(state, mode) {
+      state.mode = mode;
     }
   }
 };
