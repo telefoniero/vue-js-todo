@@ -26,6 +26,9 @@
     }
     &_checkbox {
       align-items: center;
+      @include mobile {
+        display: none;
+      }
     }
     span {
       margin-right: 0.5em;
