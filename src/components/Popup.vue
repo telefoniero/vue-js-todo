@@ -7,6 +7,7 @@
           class="popup__input"
           :value="data.title"
           @input="updateTitle"
+          :class="{ _invalid: isInvalid }"
         />
         <CustomCheckbox
           class="popup__checkbox"
@@ -30,11 +31,12 @@ import { mapActions, mapState } from "vuex";
 export default {
   data: () => {
     return {
-      isLoading: false
+      // validation is here, because it's local
+      isInvalid: false
     };
   },
   computed: {
-    ...mapState("UI", ["showPopup", "data", "mode"]),
+    ...mapState("UI", ["showPopup", "data", "mode", "isLoading"]),
     titleContent() {
       return this.mode == "edit" ? `Task #${this.data.id}` : "New task";
     }
@@ -57,11 +59,13 @@ export default {
       this.change({ completed });
     },
     saveData() {
-      if (this.mode == "edit") {
-        this.update(this.data);
-      } else if (this.mode == "create") {
-        this.create(this.data);
-      }
+      if (!this.data.title) return (this.isInvalid = true);
+
+      this.isInvalid = false;
+
+      if (this.mode == "edit") this.update(this.data);
+      else if (this.mode == "create") this.create(this.data);
+
       this.close();
     }
   },
