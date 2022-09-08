@@ -1,25 +1,27 @@
 <template>
-  <ul class="todo-list">
-    <li class="todo-list__item todo-list__item_header">
+  <div class="todo-list">
+    <div class="todo-list__item todo-list__item_header">
       <h3 class="todo-list__title" v-if="title" v-text="title" />
       <button type="button" class="todo-list__sort-btn" @click="sort">
         sort {{ sortDisplay }}
       </button>
-    </li>
-    <transition-group name="fade">
-      <li
-        class="todo-list__item todo-list__item_in-progress"
-        v-for="todo of sortedTodos"
-        :key="todo.id"
-        v-show="todos.length"
-      >
-        <TodoItem :todo="todo" />
-      </li>
-    </transition-group>
-    <li class="todo-list__item todo-list__item_note" v-show="!todos.length">
+    </div>
+    <ul class="todo-list__list">
+      <transition-group name="fade">
+        <li
+          class="todo-list__item todo-list__item_in-progress"
+          v-for="todo of sortedTodos"
+          :key="todo.id"
+          v-show="todos.length"
+        >
+          <TodoItem :todo="todo" />
+        </li>
+      </transition-group>
+    </ul>
+    <span class="todo-list__note" v-show="!todos.length">
       Empty
-    </li>
-  </ul>
+    </span>
+  </div>
 </template>
 <script>
 import TodoItem from "./TodoItem.vue";
