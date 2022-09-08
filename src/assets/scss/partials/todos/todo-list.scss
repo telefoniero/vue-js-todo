@@ -5,15 +5,32 @@
     letter-spacing: -0.0075em;
     color: $secondaryColor;
     text-transform: uppercase;
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__sort-btn {
+    border: 0;
+    background-color: transparent;
+    color: $secondaryColor;
+    text-transform: uppercase;
+    font-size: 0.8em;
   }
 
   &__item {
     margin-bottom: 24px;
-    &_title {
+    &_header {
       margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       @include mobile {
-        display: none;
+        margin-bottom: 1.5em;
       }
+    }
+    @include mobile {
+      margin-bottom: 1em;
     }
     &_note {
       color: $secondaryColor;
